@@ -1,0 +1,7 @@
+{
+  "name": "Project 33: The All-Seeing Radar",
+  "description": "An exclusive, high-density information terminal for architects of society, featuring real-time global news, financial markets, and planetary events with an initiate-inspired aesthetic.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
