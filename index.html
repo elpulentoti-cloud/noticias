@@ -3,35 +3,61 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project 33 | Nexus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Project 33 | Nodo Austral</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #D4AF37;
+            --deep-blue: #002147;
+            --obsidian: #050505;
+        }
         body {
-            background-color: #050505;
+            background-color: var(--obsidian);
             color: #e0e0e0;
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
         }
         .cinzel { font-family: 'Cinzel', serif; }
         .mono { font-family: 'JetBrains Mono', monospace; }
         
-        /* Custom scrollbar for that terminal look */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background: #fbbf24; }
+        .bg-gold { background-color: var(--gold); }
+        .text-gold { color: var(--gold); }
+        .border-gold { border-color: rgba(212, 175, 55, 0.4); }
+        .glow-gold { text-shadow: 0 0 12px rgba(212, 175, 55, 0.6); }
 
-        .glow-gold { text-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
-        .border-gold { border-color: rgba(251, 191, 36, 0.3); }
+        /* Estética de los Pilares */
+        .pillar-gradient {
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+            width: 2px;
+            opacity: 0.3;
+        }
+
+        /* Scrollbar Terminal */
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+        @keyframes pulse-gold {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse-gold { animation: pulse-gold 3s infinite; }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .ticker-wrap {
+            display: flex;
+            width: fit-content;
+            animation: ticker 25s linear infinite;
+        }
         
-        @keyframes scroll-ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-        }
-        .animate-ticker {
-            animation: scroll-ticker 30s linear infinite;
-        }
+        /* Mobile fixes */
+        .safe-bottom { padding-bottom: env(safe-area-inset-bottom); }
     </style>
 <script type="importmap">
 {

@@ -1,6 +1,6 @@
 {
-  "name": "Project 33: The All-Seeing Radar",
-  "description": "An exclusive, high-density information terminal for architects of society, featuring real-time global news, financial markets, and planetary events with an initiate-inspired aesthetic.",
+  "name": "Project 33: Nodo Austral",
+  "description": "Terminal de vigilancia arquitectónica para el territorio de Chile. Información privilegiada para el perfeccionamiento de la obra social.",
   "requestFramePermissions": [
     "geolocation"
   ]
