@@ -1,5 +1,5 @@
 
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, Type } from "@google/genai";
 import { RadarItem } from "../types";
 
 export const getTraditionInsights = async (news: RadarItem[]) => {
@@ -31,6 +31,23 @@ export const getTraditionInsights = async (news: RadarItem[]) => {
       contents: prompt,
       config: { 
         responseMimeType: "application/json",
+        // Adding responseSchema as recommended by the SDK guidelines
+        responseSchema: {
+          type: Type.OBJECT,
+          properties: {
+            efemeride: {
+              type: Type.OBJECT,
+              properties: {
+                titulo: { type: Type.STRING },
+                descripcion: { type: Type.STRING }
+              },
+              required: ["titulo", "descripcion"]
+            },
+            directriz: { type: Type.STRING },
+            clima_social: { type: Type.STRING }
+          },
+          required: ["efemeride", "directriz", "clima_social"]
+        },
         thinkingConfig: { thinkingBudget: 0 }
       }
     });

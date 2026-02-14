@@ -1,10 +1,26 @@
 
 export enum Category {
   CRONICAS = 'CRONICAS',
+  VANGUARDIA = 'VANGUARDIA',
   PATRIMONIO = 'PATRIMONIO',
   GAIA = 'GAIA',
-  COSMOS = 'COSMOS',
-  ANALES = 'ANALES'
+  AJUSTES = 'AJUSTES'
+}
+
+export enum SourceType {
+  API = 'API',
+  RSS = 'RSS',
+  SYSTEM = 'SYSTEM'
+}
+
+export interface DataSource {
+  id: string;
+  name: string;
+  url: string;
+  type: SourceType;
+  enabled: boolean;
+  category: Category;
+  customRefreshInterval?: number; // En minutos, para sintonía independiente
 }
 
 export interface RadarItem {
@@ -15,6 +31,7 @@ export interface RadarItem {
   timestamp: number;
   category: Category;
   url?: string;
+  extra?: string; // Para tráfico de búsquedas u otros datos
 }
 
 export interface ChileIndicators {
@@ -25,16 +42,22 @@ export interface ChileIndicators {
   ivp: number;
 }
 
+export type AlertType = 'CLIMA' | 'MAR' | 'SISMO' | 'SOLAR' | 'GENERAL';
+
 export interface AlertData {
+  id: string;
   title: string;
   severity: 'ALTA' | 'MEDIA' | 'INFO';
   timestamp: number;
   desc?: string;
+  type: AlertType;
+  source: string;
 }
 
-export interface AstroEvent {
-  name: string;
-  date: string;
-  type: string;
-  provider: string;
+export interface UserSettings {
+  refreshInterval: number; // en minutos (global)
+  soundEnabled: boolean;
+  soundVolume: number; // 0 a 1
+  notificationsEnabled: boolean;
+  notificationPriorityOnly: boolean; // solo notificar severidad 'ALTA'
 }
