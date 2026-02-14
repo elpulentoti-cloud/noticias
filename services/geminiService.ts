@@ -9,19 +9,19 @@ export const getTraditionInsights = async (news: RadarItem[]) => {
   const date = new Date().toLocaleDateString('es-CL');
   
   const prompt = `
-    Hoy es ${date}. 
-    1. Genera una efeméride histórica de Chile relacionada con "Constructores de la República" (figuras ilustradas, fundadores, hitos de orden y libertad).
-    2. Analiza estas noticias y extrae una directriz para el Directorio:
+    Hoy es ${date}. Actúa como el Gran Historiador de una orden masónica republicana.
+    1. Genera una efeméride histórica de Chile enfocada en la Ilustración, la Masonería o el desarrollo de las instituciones (Benjamín Vicuña Mackenna, Andrés Bello, Diego Portales, Logia Lautaro, etc.).
+    2. Analiza estas crónicas actuales y emite una directriz formal para el Gran Maestro:
     ${news.map(n => n.headline).join('\n')}
 
     Formato JSON:
     {
       "efemeride": {
         "titulo": "string",
-        "descripcion": "string (máximo 150 caracteres)"
+        "descripcion": "string (máximo 150 caracteres, tono ritual)"
       },
-      "directriz": "string (frase formal de mando)",
-      "clima_social": "string (estado de la obra)"
+      "directriz": "string (frase formal de mando masónico)",
+      "clima_social": "string (estado de la cantera/obra)"
     }
   `;
 
@@ -29,10 +29,14 @@ export const getTraditionInsights = async (news: RadarItem[]) => {
     const response = await ai.models.generateContent({
       model,
       contents: prompt,
-      config: { responseMimeType: "application/json" }
+      config: { 
+        responseMimeType: "application/json",
+        thinkingConfig: { thinkingBudget: 0 }
+      }
     });
     return JSON.parse(response.text || '{}');
   } catch (error) {
+    console.error("Fallo de Sabiduría:", error);
     return null;
   }
 };
