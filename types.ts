@@ -1,9 +1,10 @@
 
 export enum Category {
   CRONICAS = 'CRONICAS',
-  GRANDES_VALORES = 'VALORES',
-  TERRA = 'TERRA',
-  VIBRACIONES = 'VIBRACIONES'
+  PATRIMONIO = 'PATRIMONIO',
+  GAIA = 'GAIA',
+  COSMOS = 'COSMOS',
+  ANALES = 'ANALES'
 }
 
 export interface RadarItem {
@@ -21,10 +22,19 @@ export interface ChileIndicators {
   dolar: number;
   utm: number;
   ipc: number;
+  ivp: number;
 }
 
 export interface AlertData {
   title: string;
   severity: 'ALTA' | 'MEDIA' | 'INFO';
   timestamp: number;
+  desc?: string;
+}
+
+export interface AstroEvent {
+  name: string;
+  date: string;
+  type: string;
+  provider: string;
 }

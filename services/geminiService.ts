@@ -2,27 +2,26 @@
 import { GoogleGenAI } from "@google/genai";
 import { RadarItem } from "../types";
 
-export const analyzeChileanWork = async (items: RadarItem[]) => {
+export const getTraditionInsights = async (news: RadarItem[]) => {
   const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
   const model = 'gemini-3-flash-preview';
 
-  const context = items.map(i => `${i.headline}`).join('\n');
+  const date = new Date().toLocaleDateString('es-CL');
+  
   const prompt = `
-    Como el Gran Arquitecto del Análisis Geopolítico en Chile, observa los siguientes sucesos del país. 
-    Proporciona un informe para los Iniciados del Nodo Austral.
-    No menciones la palabra "masón", "logia" ni términos religiosos. 
-    Usa términos como: "Sincronía Institucional", "El Escuadrado de la Realidad", "Nivelación de Fuerzas", "Piedra Bruta Social".
-    
-    Eventos:
-    ${context}
-    
+    Hoy es ${date}. 
+    1. Genera una efeméride histórica de Chile relacionada con "Constructores de la República" (figuras ilustradas, fundadores, hitos de orden y libertad).
+    2. Analiza estas noticias y extrae una directriz para el Directorio:
+    ${news.map(n => n.headline).join('\n')}
+
     Formato JSON:
     {
-      "conclusiones": [
-        {"punto": "título corto", "explicacion": "explicación mística/técnica"},
-        {"punto": "título corto", "explicacion": "explicación mística/técnica"}
-      ],
-      "frecuencia_nacional": "string (una frase sobre el estado de Chile)"
+      "efemeride": {
+        "titulo": "string",
+        "descripcion": "string (máximo 150 caracteres)"
+      },
+      "directriz": "string (frase formal de mando)",
+      "clima_social": "string (estado de la obra)"
     }
   `;
 
